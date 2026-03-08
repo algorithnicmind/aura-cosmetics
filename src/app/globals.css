@@ -1,0 +1,295 @@
+/* ===== Google Fonts Import ===== */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+@import "tailwindcss";
+
+/* ===== CSS Custom Properties ===== */
+:root {
+  /* Brand Colors */
+  --color-nude: #E8D5C4;
+  --color-beige: #F5E6D3;
+  --color-blush: #F2C4C4;
+  --color-rose-gold: #B76E79;
+  --color-deep-rose: #8B4557;
+  --color-soft-pink: #FDF2F0;
+  --color-cream: #FFF8F5;
+  --color-warm-white: #FFFAF7;
+  --color-gold: #D4A574;
+  --color-light-gold: #E8C9A0;
+  --color-dark: #2D2D2D;
+  --color-text: #4A4A4A;
+  --color-text-light: #8A8A8A;
+  --color-border: #F0E6E0;
+
+  /* Gradients */
+  --gradient-hero: linear-gradient(135deg, #FDF2F0 0%, #F5E6D3 50%, #F2C4C4 100%);
+  --gradient-rose: linear-gradient(135deg, #B76E79 0%, #D4A574 100%);
+  --gradient-soft: linear-gradient(135deg, #FFF8F5 0%, #FDF2F0 100%);
+  --gradient-gold: linear-gradient(135deg, #D4A574 0%, #E8C9A0 50%, #D4A574 100%);
+  --gradient-card: linear-gradient(145deg, #FFFFFF 0%, #FFF8F5 100%);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(183, 110, 121, 0.08);
+  --shadow-md: 0 4px 20px rgba(183, 110, 121, 0.12);
+  --shadow-lg: 0 8px 40px rgba(183, 110, 121, 0.16);
+  --shadow-xl: 0 12px 60px rgba(183, 110, 121, 0.2);
+  --shadow-glow: 0 0 30px rgba(183, 110, 121, 0.15);
+
+  /* Typography */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Poppins', sans-serif;
+  --font-accent: 'Inter', sans-serif;
+
+  /* Spacing */
+  --section-padding: 6rem 2rem;
+  --container-max: 1280px;
+
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+}
+
+/* ===== Base Styles ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-warm-white);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: var(--color-dark);
+  line-height: 1.3;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition-fast);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-body);
+  border: none;
+  outline: none;
+}
+
+/* ===== Utility Classes ===== */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-padding {
+  padding: var(--section-padding);
+}
+
+.gradient-text {
+  background: var(--gradient-rose);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-lg);
+}
+
+/* ===== Button Styles ===== */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 14px 36px;
+  background: var(--gradient-rose);
+  color: white;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border-radius: var(--radius-full);
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: var(--transition-slow);
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 14px 36px;
+  background: transparent;
+  color: var(--color-rose-gold);
+  font-weight: 500;
+  font-size: 0.95rem;
+  border: 2px solid var(--color-rose-gold);
+  border-radius: var(--radius-full);
+  transition: var(--transition-smooth);
+  letter-spacing: 0.5px;
+}
+
+.btn-secondary:hover {
+  background: var(--color-rose-gold);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ===== Section Title ===== */
+.section-title {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-title .subtitle {
+  font-family: var(--font-accent);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-rose-gold);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.section-title h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.section-title p {
+  font-size: 1.05rem;
+  color: var(--color-text-light);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-nude);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-rose-gold);
+}
+
+/* ===== Selection ===== */
+::selection {
+  background: var(--color-blush);
+  color: var(--color-dark);
+}
+
+/* ===== Animations ===== */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(183, 110, 121, 0.1);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(183, 110, 121, 0.25);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  :root {
+    --section-padding: 4rem 1.25rem;
+  }
+
+  .container {
+    padding: 0 1.25rem;
+  }
+}
