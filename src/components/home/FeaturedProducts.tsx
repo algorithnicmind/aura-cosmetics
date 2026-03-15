@@ -49,7 +49,7 @@ const products = [
         rating: 4.6,
         reviews: 78,
         badge: "Sale",
-        image: "https://images.unsplash.com/photo-1596462502278-27bf85033e5a?q=80&w=800&auto=format&fit=crop",
+        image: "https://images.unsplash.com/photo-1570194065650-d99fb4a8ce20?q=80&w=800&auto=format&fit=crop",
     },
 ];
 
