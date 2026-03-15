@@ -135,6 +135,7 @@ export default function TestimonialsSection() {
                                 src={testimonials[currentIndex].image}
                                 alt={testimonials[currentIndex].name}
                                 fill
+                                sizes="70px"
                                 style={{ objectFit: "cover" }}
                             />
                         </div>

@@ -154,6 +154,7 @@ export default function FeaturedProducts() {
                                 src={product.image}
                                 alt={product.name}
                                 fill
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 style={{ objectFit: "cover" }}
                             />
 

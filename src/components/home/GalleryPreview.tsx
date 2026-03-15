@@ -99,6 +99,7 @@ export default function GalleryPreview() {
                             src={item.image}
                             alt={item.label}
                             fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             style={{ objectFit: "cover", transition: "transform 0.5s ease" }}
                             className="gallery-img"
                         />

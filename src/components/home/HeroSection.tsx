@@ -294,6 +294,7 @@ export default function HeroSection() {
                             src="https://images.unsplash.com/photo-1512496115851-a1c8eacb9136?q=80&w=1000&auto=format&fit=crop"
                             alt="Beautiful bride makeup"
                             fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
                             style={{ objectFit: "cover" }}
                             priority
                         />

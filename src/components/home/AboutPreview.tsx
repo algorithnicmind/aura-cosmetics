@@ -44,6 +44,7 @@ export default function AboutPreview() {
                             src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?q=80&w=800&auto=format&fit=crop"
                             alt="Makeup Artist at work"
                             fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
                             style={{ objectFit: "cover" }}
                         />
                     </div>
