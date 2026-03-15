@@ -16,19 +16,35 @@ export default function BookingPage() {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
-        // Simulate API call
-        setTimeout(() => {
-            setIsSubmitting(false);
-            setIsSuccess(true);
-            setFormData({ name: "", email: "", phone: "", service: "", date: "", time: "", message: "" });
+        setErrorMessage("");
 
-            // Reset success message
-            setTimeout(() => setIsSuccess(false), 5000);
-        }, 2000);
+        try {
+            const response = await fetch('/api/booking', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                setIsSubmitting(false);
+                setIsSuccess(true);
+                setFormData({ name: "", email: "", phone: "", service: "", date: "", time: "", message: "" });
+                setTimeout(() => setIsSuccess(false), 5000);
+            } else {
+                setIsSubmitting(false);
+                setErrorMessage(data.error || "Failed to submit booking.");
+            }
+        } catch (error) {
+            setIsSubmitting(false);
+            setErrorMessage("An unexpected error occurred. Please try again.");
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -96,6 +112,11 @@ export default function BookingPage() {
                         </motion.div>
                     ) : (
                         <form onSubmit={handleSubmit} style={{ display: "grid", gap: "1.5rem" }}>
+                            {errorMessage && (
+                                <div style={{ padding: "12px", background: "#FFEBEE", color: "#C62828", borderRadius: "8px", fontSize: "0.9rem", textAlign: "center", border: "1px solid #FFCDD2" }}>
+                                    ⚠️ {errorMessage}
+                                </div>
+                            )}
                             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }} className="form-grid">
                                 <div>
                                     <label style={{ display: "block", marginBottom: "0.5rem", fontSize: "0.9rem", color: "#4A4A4A", fontWeight: 500 }}>Full Name *</label>

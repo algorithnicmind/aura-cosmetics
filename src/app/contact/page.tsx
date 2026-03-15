@@ -2,8 +2,45 @@
 
 import { motion } from "framer-motion";
 import SectionWrapper from "@/components/ui/SectionWrapper";
+import { useState } from "react";
 
 export default function ContactPage() {
+    const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+    const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setStatus("loading");
+        setErrorMessage("");
+
+        try {
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                setStatus("success");
+                setFormData({ name: "", email: "", message: "" });
+                setTimeout(() => setStatus("idle"), 5000);
+            } else {
+                setStatus("error");
+                setErrorMessage(data.error || "Something went wrong.");
+            }
+        } catch (error) {
+            setStatus("error");
+            setErrorMessage("Failed to send message. Please try again later.");
+        }
+    };
+
     return (
         <SectionWrapper background="linear-gradient(135deg, #FDF2F0 0%, #FFF8F5 100%)">
             <div style={{ textAlign: "center", paddingTop: "6rem", paddingBottom: "3rem" }}>
@@ -87,26 +124,37 @@ export default function ContactPage() {
                         border: "1px solid rgba(240, 230, 224, 0.5)"
                     }}
                 >
-                    <form style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                    <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                        {status === "success" && (
+                            <div style={{ padding: "12px", background: "#E8F5E9", color: "#2E7D32", borderRadius: "8px", fontSize: "0.9rem", textAlign: "center", border: "1px solid #C8E6C9" }}>
+                                ✨ Thank you! Your message has been sent successfully.
+                            </div>
+                        )}
+                        {status === "error" && (
+                            <div style={{ padding: "12px", background: "#FFEBEE", color: "#C62828", borderRadius: "8px", fontSize: "0.9rem", textAlign: "center", border: "1px solid #FFCDD2" }}>
+                                ⚠️ {errorMessage}
+                            </div>
+                        )}
                         <div>
                             <label style={{ display: "block", marginBottom: "0.5rem", fontSize: "0.9rem", color: "#4A4A4A", fontWeight: 500 }}>Name</label>
-                            <input type="text" required style={{ width: "100%", padding: "12px 16px", borderRadius: "8px", border: "1px solid #F0E6E0", outline: "none", fontFamily: "'Poppins', sans-serif" }} placeholder="Your name" />
+                            <input type="text" name="name" value={formData.name} onChange={handleChange} required style={{ width: "100%", padding: "12px 16px", borderRadius: "8px", border: "1px solid #F0E6E0", outline: "none", fontFamily: "'Poppins', sans-serif" }} placeholder="Your name" />
                         </div>
                         <div>
                             <label style={{ display: "block", marginBottom: "0.5rem", fontSize: "0.9rem", color: "#4A4A4A", fontWeight: 500 }}>Email</label>
-                            <input type="email" required style={{ width: "100%", padding: "12px 16px", borderRadius: "8px", border: "1px solid #F0E6E0", outline: "none", fontFamily: "'Poppins', sans-serif" }} placeholder="Your email" />
+                            <input type="email" name="email" value={formData.email} onChange={handleChange} required style={{ width: "100%", padding: "12px 16px", borderRadius: "8px", border: "1px solid #F0E6E0", outline: "none", fontFamily: "'Poppins', sans-serif" }} placeholder="Your email" />
                         </div>
                         <div>
                             <label style={{ display: "block", marginBottom: "0.5rem", fontSize: "0.9rem", color: "#4A4A4A", fontWeight: 500 }}>Message</label>
-                            <textarea required rows={5} style={{ width: "100%", padding: "12px 16px", borderRadius: "8px", border: "1px solid #F0E6E0", outline: "none", fontFamily: "'Poppins', sans-serif", resize: "none" }} placeholder="How can we help?" />
+                            <textarea name="message" value={formData.message} onChange={handleChange} required rows={5} style={{ width: "100%", padding: "12px 16px", borderRadius: "8px", border: "1px solid #F0E6E0", outline: "none", fontFamily: "'Poppins', sans-serif", resize: "none" }} placeholder="How can we help?" />
                         </div>
                         <motion.button
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             type="submit"
-                            style={{ padding: "14px", background: "linear-gradient(135deg, #B76E79, #D4A574)", color: "white", border: "none", borderRadius: "8px", fontWeight: 600, fontFamily: "'Poppins', sans-serif", marginTop: "0.5rem", cursor: "pointer" }}
+                            disabled={status === "loading"}
+                            style={{ padding: "14px", background: "linear-gradient(135deg, #B76E79, #D4A574)", color: "white", border: "none", borderRadius: "8px", fontWeight: 600, fontFamily: "'Poppins', sans-serif", marginTop: "0.5rem", cursor: status === "loading" ? "not-allowed" : "pointer", opacity: status === "loading" ? 0.7 : 1 }}
                         >
-                            Send Message
+                            {status === "loading" ? "Sending..." : "Send Message"}
                         </motion.button>
                     </form>
                 </motion.div>
