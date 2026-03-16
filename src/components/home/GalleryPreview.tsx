@@ -6,8 +6,8 @@ import Image from "next/image";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 
 const galleryItems = [
-    { image: "https://images.unsplash.com/photo-1595476108010-b4d1f10d5e43?q=80&w=800&auto=format&fit=crop", label: "Bridal" },
-    { image: "https://images.unsplash.com/photo-1512496115851-a1c8eacb9136?q=80&w=800&auto=format&fit=crop", label: "Party" },
+    { image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop", label: "Bridal" },
+    { image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=800&auto=format&fit=crop", label: "Party" },
     { image: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=800&auto=format&fit=crop", label: "Editorial" },
     { image: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?q=80&w=800&auto=format&fit=crop", label: "Glam" },
     { image: "https://images.unsplash.com/photo-1526045612212-70caf35c14df?q=80&w=800&auto=format&fit=crop", label: "Celebrity" },
