@@ -5,6 +5,7 @@
 ![Aura Cosmetics](https://via.placeholder.com/1200x400?text=Aura+Cosmetics) <!-- Replace with actual banner if available -->
 
 ## 📋 Table of Contents
+
 - [About the Project](#about-the-project)
 - [✨ Features](#-features)
 - [🛠️ Tech Stack](#️-tech-stack)
@@ -27,15 +28,18 @@
 ## 🛠️ Tech Stack
 
 **Frontend Framework**
+
 - [Next.js](https://nextjs.org/) (App Router, React 19)
 - [TypeScript](https://www.typescriptlang.org/) for robust type safety
 
 **Styling & Animations**
+
 - [Tailwind CSS v4](https://tailwindcss.com/) for utility-first styling
 - [Framer Motion](https://www.framer.com/motion/) for fluid animations
 - [Lucide React](https://lucide.dev/) for elegant iconography
 
 **Database & ODM**
+
 - [MongoDB](https://www.mongodb.com/)
 - [Mongoose](https://mongoosejs.com/)
 
@@ -62,24 +66,28 @@ Follow these instructions to set up the project locally on your machine.
 ### Prerequisites
 
 Ensure you have the following installed:
+
 - **Node.js**: v20 or higher
 - **npm** or **yarn** or **pnpm**
 
 ### Installation
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/your-username/aura-cosmetics.git
    cd aura-cosmetics
    ```
 
 2. **Install dependencies:**
+
    ```bash
    npm install
    ```
 
 3. **Set up Environment Variables:**
    Create a `.env.local` file in the root directory and add your connection strings:
+
    ```env
    MONGODB_URI=your_mongodb_connection_string
    ```
@@ -92,9 +100,9 @@ Ensure you have the following installed:
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see the [Contributing Guidelines](#) above or refer to our separate guide for detailed information on how to participate in this project. 
+We welcome contributions! Please see the [Contributing Guidelines](#) above or refer to our separate guide for detailed information on how to participate in this project.
 
-*If you are using GitHub Desktop, we have provided a step-by-step guide below.*
+_If you are using GitHub Desktop, we have provided a step-by-step guide below._
 
 ## 📄 License
 
